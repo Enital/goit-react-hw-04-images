@@ -1,5 +1,7 @@
 import { ThreeCircles } from 'react-loader-spinner';
+
 import css from './loader.module.css';
+
 function Loader() {
   return (
     <div className={css.loader}>
@@ -18,4 +20,5 @@ function Loader() {
     </div>
   );
 }
+
 export default Loader;

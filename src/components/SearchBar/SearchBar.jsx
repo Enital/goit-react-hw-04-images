@@ -1,27 +1,23 @@
-import React from 'react';
+import { useState } from 'react';
 
 import css from './searchBar.module.css';
 
-class SearchBar extends React.Component {
-  state = {
-    inputValue: '',
-  };
+export default function SearchBar({onFormSubmit}) {
+  const [inputValue, setInputValue] = useState('');
 
-  handleInputChange = event => {
-    const value = event.target.value;
-    this.setState({ inputValue: value });
+  const handleInputChange = event => {
+    setInputValue(event.target.value);
   };
-
-  handleFormSubmit = event => {
+  
+  const handleFormSubmit = event => {
     event.preventDefault();
-    this.props.onFormSubmit(this.state.inputValue);
-    this.setState({ inputValue: '' });
+    onFormSubmit(inputValue);
+    setInputValue('');
   };
-
-  render() {
-    return (
+    
+  return (
       <header className={css.searchBar}>
-        <form className={css.form} onSubmit={this.handleFormSubmit}>
+        <form className={css.form} onSubmit={handleFormSubmit}>
           <button type="submit">
             <span>Search</span>
           </button>
@@ -30,13 +26,10 @@ class SearchBar extends React.Component {
             name="image"
             autoComplete="off"
             placeholder="Search images and photos"
-            value={this.state.inputValue}
-            onChange={this.handleInputChange}
+            value={inputValue}
+            onChange={handleInputChange}
           />
         </form>
       </header>
     );
-  }
 }
-
-export default SearchBar;
